@@ -146,6 +146,7 @@ def personal_check(config, pattern, match_list, match_seeds ,seeds_score):
         responce = twitter.show(user[0])
         if responce.status_code != 200:
           print("Error code: %d" %(responce.status_code))
+          database.insert(query_database, (0, user[0], queryID, "error", "0"))
           continue
 
         ress = json.loads(responce.text)

@@ -49,8 +49,8 @@ def different_approximate_path(pattern, seed, min_needs, max_needs):
         elif isinstance(answer_list, list): return answer_list
         else: print("load error (answer_list)")
 
-    answer_list = eval('basic_pass'+str(pattern))(seed)
 
+    answer_list = eval('basic_pass'+str(pattern))(seed)
     if isinstance(answer_list, dict):
         temp_dics = []
         for max_need in max_needs:
@@ -159,7 +159,8 @@ def init_pickle(seed):
     for i in range(1,7):
         #if os.path.isfile(DIR + seed + '_' + str(i) + '.pickle') == False or os.path.isfile(DIR + seed + '_' + str(i) + '_app.pickle') == False:#friend
         if os.path.isfile(DIR + seed + '_' + str(i) + '_app.pickle') == False:
-            if i==1 or i==2:def different_approximate_path(pattern, seed, min_needs, max_needs):
+            if i==1 or i==2:de  print("a")
+f different_approximate_path(pattern, seed, min_needs, max_needs):
     different_list = []
     for min_need in min_needs:
         temp_list = Mypickle.load(DIR, "different_" + seed + "_" + min_need)
@@ -210,7 +211,6 @@ def join_dic(dics):
 
 
 def basic_pass1(seed):
-
   if not os.path.isfile(DIR + seed + '_1.pickle'):
       friends = update("friends_only",seed, seed)
       Mypickle.save(DIR, friends, seed + '_1')
@@ -235,7 +235,7 @@ def basic_pass3(seed):
   _3 = {}
 
   if not os.path.isfile(DIR + seed + '_3.pickle'):
-      friends = Mypickle.load(DIR, seed + '_1')
+      friends = basic_pass1(seed)
       for friend in friends:
           followers = update("followers_only",friend, seed)
           for follower in followers:
@@ -254,7 +254,7 @@ def basic_pass4(seed):
   _4 = {}
 
   if not os.path.isfile(DIR + seed + '_4.pickle'):
-      followers = Mypickle.load(DIR, seed + '_2')
+      followers = basic_pass2(seed)
       for follower in followers:
           friends = update("friends_only",follower, seed)
           for friend in friends:
@@ -273,7 +273,7 @@ def basic_pass5(seed):
   _5 = {}
 
   if not os.path.isfile(DIR + seed + '_5.pickle'):
-      friends = Mypickle.load(DIR, seed + '_1')
+      friends = basic_pass1(seed)
       for friend in friends:
           friends_2 = update("friends_only",friend,seed)
           for friend_2 in friends_2:
@@ -291,7 +291,7 @@ def basic_pass6(seed):
   _6 = {}
 
   if not os.path.isfile(DIR + seed + '_6.pickle'):
-      followers = Mypickle.load(DIR, seed + '_2')
+      followers = basic_pass2(seed)
       for follower in followers:
           followers_2 = update("followers_only",follower,seed)
           for follower_2 in followers_2:
@@ -308,8 +308,8 @@ def basic_pass7(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_7.pickle'):
-    _1 = Mypickle.load(DIR, seed + '_1')
-    _2 = Mypickle.load(DIR, seed + '_2')
+    _1 = basic_pass1(seed)
+    _2 = basic_pass2(seed)
     match_list = list(set(_1) & set(_2))
     Mypickle.save(DIR, match_list, seed + '_7')
   else:
@@ -321,8 +321,8 @@ def basic_pass7(seed):
 def basic_pass8(seed):
 
   if not os.path.isfile(DIR + seed + '_8.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _3 = Mypickle.load(DIR, seed + '_3')
+      _2 = basic_pass2(seed)
+      _3 = basic_pass3(seed)
       match_dic =  {v:_3[v] for v in list(set(_2) & set(_3.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_8')
   else:
@@ -336,8 +336,8 @@ def basic_pass9(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_9.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _3 = Mypickle.load(DIR, seed + '_3')
+      _1 = basic_pass1(seed)
+      _3 = basic_pass3(seed)
       match_dic =  {v:_3[v] for v in list(set(_1) & set(_3.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_9')
   else:
@@ -349,8 +349,8 @@ def basic_pass9(seed):
 def basic_pass10(seed):
 
   if not os.path.isfile(DIR + seed + '_10.pickle'):
-      _3 = Mypickle.load(DIR, seed + '_3')
-      _5 = Mypickle.load(DIR, seed + '_5')
+      _3 = basic_pass3(seed)
+      _5 = basic_pass5(seed)
       match_dic = intersections(_5,_3)
       Mypickle.save(DIR, match_dic, seed + '_10')
   else:
@@ -362,8 +362,8 @@ def basic_pass10(seed):
 def basic_pass11(seed):
 
   if not os.path.isfile(DIR + seed + '_11.pickle'):
-      _3 = Mypickle.load(DIR, seed + '_3')
-      _6 = Mypickle.load(DIR, seed + '_6')
+      _3 = basic_pass3(seed)
+      _6 = basic_pass6(seed)
       match_dic = intersections(_3,_6)
       Mypickle.save(DIR, match_dic, seed + '_11')
   else:
@@ -377,8 +377,8 @@ def basic_pass12(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_12.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _4 = Mypickle.load(DIR, seed + '_4')
+      _2 = basic_pass2(seed)
+      _4 = basic_pass4(seed)
       match_dic =  {v:_4[v] for v in list(set(_2) & set(_4.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_12')
   else:
@@ -392,8 +392,8 @@ def basic_pass13(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_13.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _4 = Mypickle.load(DIR, seed + '_4')
+      _1 = basic_pass1(seed)
+      _4 = basic_pass4(seed)
       match_dic =  {v:_4[v] for v in list(set(_1) & set(_4.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_13')
   else:
@@ -405,8 +405,8 @@ def basic_pass13(seed):
 def basic_pass14(seed):
 
   if not os.path.isfile(DIR + seed + '_14.pickle'):
-      _4 = Mypickle.load(DIR, seed + '_4')
-      _5 = Mypickle.load(DIR, seed + '_5')
+      _4 = basic_pass4(seed)
+      _5 = basic_pass5(seed)
       match_dic = intersections(_5,_4)
       Mypickle.save(DIR, match_dic, seed + '_14')
   else:
@@ -418,8 +418,8 @@ def basic_pass14(seed):
 def basic_pass15(seed):
 
   if not os.path.isfile(DIR + seed + '_15.pickle'):
-      _4 = Mypickle.load(DIR, seed + '_4')
-      _6 = Mypickle.load(DIR, seed + '_6')
+      _4 = basic_pass4(seed)
+      _6 = basic_pass6(seed)
       match_dic = intersections(_4,_6)
       Mypickle.save(DIR, match_dic, seed + '_15')
   else:
@@ -433,8 +433,8 @@ def basic_pass16(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_16.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _5 = Mypickle.load(DIR, seed + '_5')
+      _2 = basic_pass2(seed)
+      _5 = basic_pass5(seed)
       match_dic =  {v:_5[v] for v in list(set(_2) & set(_5.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_16')
   else:
@@ -448,8 +448,8 @@ def basic_pass17(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_17.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _5 = Mypickle.load(DIR, seed + '_5')
+      _1 = basic_pass1(seed)
+      _5 = basic_pass5(seed)
       match_dic =  {v:_5[v] for v in list(set(_1) & set(_5.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_17')
   else:
@@ -463,8 +463,8 @@ def basic_pass18(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_18.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _6 = Mypickle.load(DIR, seed + '_6')
+      _2 = basic_pass2(seed)
+      _6 = basic_pass6(seed)
       match_dic =  {v:_6[v] for v in list(set(_2) & set(_6.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_18')
   else:
@@ -478,8 +478,8 @@ def basic_pass19(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_19.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _6 = Mypickle.load(DIR, seed + '_6')
+      _1 = basic_pass1(seed)
+      _6 = basic_pass6(seed)
       match_dic =  {v:_6[v] for v in list(set(_1) & set(_6.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_19')
   else:
@@ -493,8 +493,8 @@ def basic_pass20(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_20.pickle'):
-      _3 = Mypickle.load(DIR, seed + '_3')
-      _7 = Mypickle.load(DIR, seed + '_7')
+      _3 = basic_pass3(seed)
+      _7 = basic_pass7(seed)
       match_dic =  {v:_3[v] for v in list(set(_7) & set(_3.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_20')
   else:
@@ -508,8 +508,8 @@ def basic_pass21(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_21.pickle'):
-      _4 = Mypickle.load(DIR, seed + '_4')
-      _7 = Mypickle.load(DIR, seed + '_7')
+      _4 = basic_pass4(seed)
+      _7 = basic_pass7(seed)
       match_dic =  {v:_4[v] for v in list(set(_7) & set(_4.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_21')
   else:
@@ -523,8 +523,8 @@ def basic_pass22(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_22.pickle'):
-      _5 = Mypickle.load(DIR, seed + '_5')
-      _7 = Mypickle.load(DIR, seed + '_7')
+      _5 = basic_pass5(seed)
+      _7 = basic_pass7(seed)
       match_dic =  {v:_5[v] for v in list(set(_7) & set(_5.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_22')
   else:
@@ -538,8 +538,8 @@ def basic_pass23(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_23.pickle'):
-      _6 = Mypickle.load(DIR, seed + '_6')
-      _7 = Mypickle.load(DIR, seed + '_7')
+      _6 = basic_pass6(seed)
+      _7 = basic_pass7(seed)
       match_dic =  {v:_6[v] for v in list(set(_7) & set(_6.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_23')
   else:
@@ -551,10 +551,10 @@ def basic_pass23(seed):
 def basic_pass24(seed):
 
   if not os.path.isfile(DIR + seed + '_24.pickle'):
-      _3 = Mypickle.load(DIR, seed + '_3')
-      _4 = Mypickle.load(DIR, seed + '_4')
-      _5 = Mypickle.load(DIR, seed + '_5')
-      _6 = Mypickle.load(DIR, seed + '_6')
+      _3 = basic_pass3(seed)
+      _4 = basic_pass4(seed)
+      _5 = basic_pass5(seed)
+      _6 = basic_pass6(seed)
       match_dic = intersections(_5,_3,_4,_6)
       Mypickle.save(DIR, match_dic, seed + '_24')
   else:
@@ -568,8 +568,8 @@ def basic_pass25(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_25.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _10 = Mypickle.load(DIR, seed + '_10')
+      _2 = basic_pass2(seed)
+      _10 = basic_pass10(seed)
       match_dic =  {v:_10[v] for v in list(set(_2) & set(_10.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_25')
   else:
@@ -582,8 +582,8 @@ def basic_pass26(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_26.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _10 = Mypickle.load(DIR, seed + '_10')
+      _1 = basic_pass1(seed)
+      _10 = basic_pass10(seed)
       match_dic =  {v:_10[v] for v in list(set(_1) & set(_10.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_26')
   else:
@@ -596,8 +596,8 @@ def basic_pass27(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_27.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _11 = Mypickle.load(DIR, seed + '_11')
+      _2 = basic_pass2(seed)
+      _11 = basic_pass11(seed)
       match_dic =  {v:_11[v] for v in list(set(_2) & set(_11.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_27')
   else:
@@ -611,8 +611,8 @@ def basic_pass28(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_28.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _11 = Mypickle.load(DIR, seed + '_11')
+      _1 = basic_pass1(seed)
+      _11 = basic_pass11(seed)
       match_dic =  {v:_11[v] for v in list(set(_1) & set(_11.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_28')
   else:
@@ -626,8 +626,8 @@ def basic_pass29(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_29.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _14 = Mypickle.load(DIR, seed + '_14')
+      _2 = basic_pass2(seed)
+      _14 = basic_pass14(seed)
       match_dic =  {v:_14[v] for v in list(set(_2) & set(_14.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_29')
   else:
@@ -641,8 +641,8 @@ def basic_pass30(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_30.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _14 = Mypickle.load(DIR, seed + '_14')
+      _1 = basic_pass1(seed)
+      _14 = basic_pass14(seed)
       match_dic =  {v:_14[v] for v in list(set(_1) & set(_14.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_30')
   else:
@@ -656,8 +656,8 @@ def basic_pass31(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_31.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _15 = Mypickle.load(DIR, seed + '_15')
+      _2 = basic_pass2(seed)
+      _15 = basic_pass15(seed)
       match_dic =  {v:_15[v] for v in list(set(_2) & set(_15.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_31')
   else:
@@ -671,8 +671,8 @@ def basic_pass32(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_32.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _15 = Mypickle.load(DIR, seed + '_15')
+      _1 = basic_pass1(seed)
+      _15 = basic_pass15(seed)
       match_dic =  {v:_15[v] for v in list(set(_1) & set(_15.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_32')
   else:
@@ -685,8 +685,8 @@ def basic_pass33(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_33.pickle'):
-      _7 = Mypickle.load(DIR, seed + '_7')
-      _10 = Mypickle.load(DIR, seed + '_10')
+      _7 = basic_pass7(seed)
+      _10 = basic_pass10(seed)
       match_dic =  {v:_10[v] for v in list(set(_7) & set(_10.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_33')
   else:
@@ -699,8 +699,8 @@ def basic_pass34(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_34.pickle'):
-      _7 = Mypickle.load(DIR, seed + '_7')
-      _11 = Mypickle.load(DIR, seed + '_11')
+      _7 = basic_pass7(seed)
+      _11 = basic_pass11(seed)
       match_dic =  {v:_11[v] for v in list(set(_7) & set(_11.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_34')
   else:
@@ -713,8 +713,8 @@ def basic_pass35(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_35.pickle'):
-      _7 = Mypickle.load(DIR, seed + '_7')
-      _14 = Mypickle.load(DIR, seed + '_14')
+      _7 = basic_pass7(seed)
+      _14 = basic_pass14(seed)
       match_dic =  {v:_14[v] for v in list(set(_7) & set(_14.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_35')
   else:
@@ -727,8 +727,8 @@ def basic_pass36(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_36.pickle'):
-      _7 = Mypickle.load(DIR, seed + '_7')
-      _15 = Mypickle.load(DIR, seed + '_15')
+      _7 = basic_pass7(seed)
+      _15 = basic_pass15(seed)
       match_dic =  {v:_15[v] for v in list(set(_7) & set(_15.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_36')
   else:
@@ -741,8 +741,8 @@ def basic_pass37(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_37.pickle'):
-      _2 = Mypickle.load(DIR, seed + '_2')
-      _24 = Mypickle.load(DIR, seed + '_24')
+      _2 = basic_pass2(seed)
+      _24 =basic_pass24(seed)
       match_dic =  {v:_24[v] for v in list(set(_2) & set(_24.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_37')
   else:
@@ -755,8 +755,8 @@ def basic_pass38(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_38.pickle'):
-      _1 = Mypickle.load(DIR, seed + '_1')
-      _24 = Mypickle.load(DIR, seed + '_24')
+      _1 = basic_pass1(seed)
+      _24 = basic_pass24(seed)
       match_dic =  {v:_24[v] for v in list(set(_1) & set(_24.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_38')
   else:
@@ -769,8 +769,8 @@ def basic_pass39(seed):
   match_list = []
 
   if not os.path.isfile(DIR + seed + '_39.pickle'):
-      _7 = Mypickle.load(DIR, seed + '_7')
-      _24 = Mypickle.load(DIR, seed + '_24')
+      _7 = basic_pass7(seed)
+      _24 = basic_pass24(seed)
       match_dic =  {v:_24[v] for v in list(set(_7) & set(_24.keys()))}
       Mypickle.save(DIR, match_dic, seed + '_39')
   else:

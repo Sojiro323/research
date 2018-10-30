@@ -50,12 +50,10 @@ if __name__ == "__main__":
     seeds_score = utils.set_score(config, seeds)
     Mypickle.save(path, seeds_score, "seeds_score_" + query_database + "_" + queryID)
 
-
   _, next_pattern, seeds_score = utils.passcheck_continue(config,"0", seeds_score)
-
   while(1):
       next_pattern, seeds_list, seeds_score = recommend.recommendation(config, next_pattern, seeds_list, seeds_score)
-      if len(database.select('SELECT * from {0} where queryID = \'{1}\''.format(query_database, queryID))) >= get_num+len(seeds): break
+      if int(database.select("SELECT MAX(ID) from {0} where queryID = \'{1}\'".format(query_database, queryID))[0][0]) >= get_num+len(seeds): break
 
   print("finish work!!!")
   #recommend.visualize(seeds_list[start_num:])
